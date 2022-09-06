@@ -1,0 +1,1 @@
+export { useMatchesData } from "./useMatchesData";
