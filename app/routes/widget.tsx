@@ -47,7 +47,7 @@ export default function WidgetRoute() {
   }, [widgetList]);
   // get next page
   const getNext = useCallback(() => {
-    if (!canGetNext) return;
+    if (!canGetNext || loading) return;
     const params = new URLSearchParams(searchParams);
     // skip
     const skip = +(params?.get('skip') || 0);
@@ -66,26 +66,24 @@ export default function WidgetRoute() {
       const contentHeight = elem.scrollHeight;
       if (contentHeight - elem.scrollTop < 1.5 * viewportHeight) {
         if (canGetNext && !loading) {
-          setLoading(true);
-          setCanGetNext(false);
           getNext();
         }
       }
     },
     [canGetNext, getNext, loading],
   );
+  // eagerly load first 3 pages
   useEffect(() => {
     if (data.length <= pageSize * 2 && canGetNext && !loading) {
-      setLoading(true);
-      setCanGetNext(false);
       getNext();
     }
   }, [canGetNext, data.length, getNext, loading]);
+  //
   return (
-    <div onScroll={handleScroll} className="h-full overflow-auto">
+    <div onScroll={handleScroll} className=" h-full overflow-auto">
       {data.map((w) => (
-        <div key={w.widgetId}>
-          <div>{w.widgetName}</div>
+        <div key={w.widgetId} className="m-4 rounded-md border p-4">
+          <div className="text-large font-semibold">{w.widgetName}</div>
           <div>{w.widgetNumber}</div>
         </div>
       ))}

@@ -5,20 +5,25 @@
   </a>
 </p>
 
+Code for [Remix Infinite Scrolling blog post](https://remixfast.com/blog/remix-infinite-scrolling)👀
+
 RemixFast Stater App includes ready to integrate code to help you jump start your Remix project 🚀.
 
 ## Start
 
 Initialize =>
+
 ```
-npm run init       
+npm run init
 ```
+
 The database seed script creates a new user you can use to get started:
 
 - Email: Your Github email
 - Password: `RemixFast8`
 
 Start UI =>
+
 ```
 npm run dev
 ```
